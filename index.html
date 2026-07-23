@@ -15,6 +15,7 @@
     --steel:#3c5a68;
     --rust:#c1461d;
     --rust-dark:#9c3714;
+    --rust-glow:rgba(193,70,29,0.35);
     --sand:#e7e1d3;
     --paper:#f2efe6;
     --ink:#152026;
@@ -29,6 +30,7 @@
     color:var(--ink);
     background:var(--paper);
     line-height:1.55;
+    overflow-x:hidden;
   }
   h1,h2,h3,h4{
     font-family:'Barlow Condensed',sans-serif;
@@ -37,7 +39,7 @@
     margin:0 0 .4em;
   }
   a{color:inherit;}
-  .container{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .container{max-width:1160px;margin:0 auto;padding:0 24px;position:relative;}
   .tag{
     display:inline-flex;
     align-items:center;
@@ -65,29 +67,82 @@
     text-decoration:none;
     border:2px solid transparent;
     cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
   }
+  .btn:hover{transform:translateY(-3px);}
   .btn-primary{background:var(--rust);color:#fff;}
-  .btn-primary:hover{background:var(--rust-dark);}
+  .btn-primary:hover{background:var(--rust-dark);box-shadow:0 10px 26px var(--rust-glow);}
   .btn-dark{background:var(--navy);color:#fff;}
-  .btn-dark:hover{background:var(--navy-2);}
+  .btn-dark:hover{background:var(--navy-2);box-shadow:0 10px 26px rgba(18,32,43,0.4);}
   .btn-ghost{background:transparent;color:#fff;border-color:#fff;}
   .btn-ghost:hover{background:#fff;color:var(--navy);}
 
+  /* Scroll progress bar */
+  #scrollbar{
+    position:fixed;
+    top:0;left:0;
+    height:3px;
+    width:0%;
+    background:var(--rust);
+    z-index:999;
+    transition:width .08s linear;
+  }
+
   /* Header */
-  header{background:var(--navy);color:#fff;border-bottom:4px solid var(--rust);}
-  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    border-bottom:4px solid var(--rust);
+    position:sticky;
+    top:0;
+    z-index:100;
+    transition:padding .25s ease, box-shadow .25s ease;
+  }
+  header.scrolled{padding-top:0;box-shadow:0 10px 30px rgba(0,0,0,0.25);}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;transition:padding .25s ease;}
+  header.scrolled .nav-wrap{padding:8px 0;}
   .brand{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;text-transform:uppercase;letter-spacing:.5px;}
   .brand .badge{
     width:40px;height:40px;background:var(--rust);
     display:flex;align-items:center;justify-content:center;font-size:1.2rem;
     transform:rotate(-3deg);
+    transition:transform .4s ease;
   }
+  .brand:hover .badge{transform:rotate(12deg) scale(1.08);}
   nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;}
-  nav a{text-decoration:none;color:#dfe6e9;font-weight:500;font-size:.92rem;}
-  nav a:hover{color:var(--rust);}
+  nav a{
+    text-decoration:none;color:#dfe6e9;font-weight:500;font-size:.92rem;
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:0;
+    height:2px;
+    background:var(--rust);
+    transition:width .25s ease;
+  }
+  nav a:hover{color:#fff;}
+  nav a:hover::after, nav a.active::after{width:100%;}
+  nav a.active{color:var(--rust);}
   .nav-cta{display:flex;align-items:center;gap:16px;}
   .phone-link{font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;letter-spacing:.5px;}
   .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;}
+
+  /* Reveal-on-scroll */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-scale{opacity:0;transform:scale(.92);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1);}
+  .reveal-scale.in{opacity:1;transform:scale(1);}
+  .stagger > *{transition-delay:calc(var(--i, 0) * 90ms);}
 
   /* Hero */
   .hero{
@@ -95,19 +150,38 @@
     color:#fff;
     padding:70px 0 0;
     position:relative;
+    overflow:hidden;
   }
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;}
+  .hero-bg-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:44px 44px;
+    pointer-events:none;
+    will-change:transform;
+  }
+  .hero-glow{
+    position:absolute;
+    width:520px;height:520px;
+    background:radial-gradient(circle, var(--rust-glow), transparent 70%);
+    right:-160px;
+    top:-120px;
+    pointer-events:none;
+    will-change:transform;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;position:relative;z-index:1;}
   .hero-text{padding:40px 0 70px;}
   .hero h1{font-size:3.4rem;line-height:.98;color:#fff;margin-bottom:.3em;}
-  .hero h1 span{color:var(--rust);}
+  .hero h1 .line{display:block;overflow:hidden;}
+  .hero h1 .line span{display:inline-block;transform:translateY(110%);animation:riseUp .8s cubic-bezier(.2,.7,.3,1) forwards;}
+  .hero h1 .line:nth-child(2) span{animation-delay:.12s;}
+  .hero h1 span.accent{color:var(--rust);}
+  @keyframes riseUp{to{transform:translateY(0);}}
   .hero p.lead{font-size:1.15rem;color:#c7d0d4;max-width:480px;margin-bottom:30px;font-family:'Archivo',sans-serif;}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
-  .hero-facts{
-    display:flex;
-    gap:0;
-    border-top:1px solid rgba(255,255,255,0.15);
-    padding-top:22px;
-  }
+  .hero-facts{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.15);padding-top:22px;}
   .hero-facts div{padding-right:30px;margin-right:30px;border-right:1px solid rgba(255,255,255,0.15);}
   .hero-facts div:last-child{border-right:none;}
   .hero-facts strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:var(--rust);}
@@ -120,6 +194,7 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
+    position:relative;
   }
   .hero-panel h3{color:#fff;font-size:1.5rem;}
   .hero-panel p{color:#ffe3d6;font-size:.95rem;margin-bottom:22px;}
@@ -135,9 +210,43 @@
     letter-spacing:.5px;
     text-transform:uppercase;
     font-size:1.05rem;
+    transition:transform .25s ease, padding-left .25s ease;
   }
   .pest-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.25);}
-  .pest-list .emoji{font-size:1.3rem;}
+  .pest-list li:hover{padding-left:10px;}
+  .pest-list .emoji{font-size:1.3rem;transition:transform .3s ease;}
+  .pest-list li:hover .emoji{transform:scale(1.25) rotate(-8deg);}
+
+  /* Marquee ticker */
+  .ticker-wrap{
+    background:var(--rust);
+    color:#fff;
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:2px solid var(--navy);
+    position:relative;
+    z-index:1;
+  }
+  .ticker{
+    display:inline-flex;
+    animation:tickerScroll 26s linear infinite;
+  }
+  .ticker span{
+    padding:10px 28px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:.85rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .ticker span::after{content:"•";margin-left:28px;color:#ffdcc9;}
+  @keyframes tickerScroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
 
   /* Sections */
   section{padding:76px 0;}
@@ -145,15 +254,35 @@
   .section-head h2{font-size:2.4rem;color:var(--navy);}
   .section-head p{color:var(--steel);font-family:'Archivo',sans-serif;font-size:1.02rem;}
 
+  /* diagonal divider between hero/ticker and services */
+  .divider{
+    height:64px;
+    background:var(--paper);
+    position:relative;
+    z-index:1;
+    clip-path:polygon(0 100%, 100% 0, 100% 100%);
+  }
+  .divider.up{background:var(--navy);clip-path:polygon(0 0, 100% 100%, 0 100%);}
+
   /* Services */
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:2px solid var(--navy);}
-  .service-card{background:var(--paper);padding:30px 26px;}
-  .service-card .num{font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:700;color:var(--rust);line-height:1;margin-bottom:8px;}
+  .service-card{
+    background:var(--paper);
+    padding:30px 26px;
+    transition:background .3s ease, transform .3s ease;
+    position:relative;
+  }
+  .service-card:hover{background:#fff;transform:translateY(-6px);box-shadow:0 16px 30px rgba(18,32,43,0.12);z-index:2;}
+  .service-card .num{
+    font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:700;color:var(--rust);line-height:1;margin-bottom:8px;
+    transition:transform .3s ease;
+  }
+  .service-card:hover .num{transform:translateX(4px);}
   .service-card h3{font-size:1.35rem;color:var(--navy);}
   .service-card p{color:var(--steel);font-size:.94rem;margin:0;}
 
   /* Why us - straightforward list, no icons soup */
-  .why-section{background:var(--navy);color:#fff;}
+  .why-section{background:var(--navy);color:#fff;position:relative;}
   .why-section .section-head h2{color:#fff;}
   .why-section .section-head p{color:#a9b4b8;}
   .why-list{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,0.15);}
@@ -163,16 +292,31 @@
     gap:18px;
     padding:24px 0;
     border-bottom:1px solid rgba(255,255,255,0.15);
+    transition:background .25s ease;
   }
+  .why-row:hover{background:rgba(255,255,255,0.03);}
   .why-list .why-row:nth-child(odd){padding-right:30px;border-right:1px solid rgba(255,255,255,0.15);}
   .why-list .why-row:nth-child(even){padding-left:30px;}
   .why-row .mark{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;color:var(--rust);}
   .why-row h4{color:#fff;font-size:1.2rem;margin-bottom:6px;}
   .why-row p{color:#a9b4b8;margin:0;font-size:.92rem;}
 
+  /* Stats counter strip */
+  .stats-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid rgba(255,255,255,0.15);
+    margin-top:50px;
+  }
+  .stat{text-align:center;padding:26px 10px;border-right:1px solid rgba(255,255,255,0.15);}
+  .stat:last-child{border-right:none;}
+  .stat .count{font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:700;color:var(--rust);line-height:1;}
+  .stat .label{font-size:.8rem;color:#a9b4b8;text-transform:uppercase;letter-spacing:.6px;margin-top:6px;}
+
   /* Process */
   .process-strip{display:flex;border:2px solid var(--navy);}
-  .process-step{flex:1;padding:28px 24px;position:relative;background:var(--paper);}
+  .process-step{flex:1;padding:28px 24px;position:relative;background:var(--paper);transition:background .3s ease;}
+  .process-step:hover{background:#fff;}
   .process-step + .process-step{border-left:2px solid var(--navy);}
   .process-step .step-num{
     font-family:'Barlow Condensed',sans-serif;
@@ -183,13 +327,16 @@
     display:inline-block;
     padding:2px 10px;
     margin-bottom:12px;
+    transition:background .25s ease;
   }
+  .process-step:hover .step-num{background:var(--rust);}
   .process-step h4{color:var(--navy);font-size:1.2rem;}
   .process-step p{color:var(--steel);font-size:.9rem;margin:0;}
 
   /* Reviews */
   .review-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:2px solid var(--navy);}
-  .review-card{background:#fff;padding:28px;}
+  .review-card{background:#fff;padding:28px;transition:transform .3s ease, box-shadow .3s ease;}
+  .review-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(18,32,43,0.12);}
   .review-card .stars{color:var(--rust);letter-spacing:2px;margin-bottom:10px;}
   .review-card p.quote{font-size:.96rem;color:var(--ink);margin-bottom:16px;}
   .review-card .who{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--navy);font-size:.95rem;}
@@ -208,14 +355,23 @@
     font-family:'Barlow Condensed',sans-serif;
     text-transform:uppercase;
     letter-spacing:.4px;
+    transition:padding-left .2s ease, color .2s ease;
   }
+  .area-list li:hover{padding-left:8px;color:var(--rust);}
   .area-card{background:var(--navy);color:#fff;padding:36px;border-left:6px solid var(--rust);}
   .area-card h3{color:#fff;}
   .area-card p{color:#c7d0d4;}
 
   /* CTA banner */
-  .cta-banner{background:var(--rust);color:#fff;}
-  .cta-wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .cta-banner{background:var(--rust);color:#fff;position:relative;overflow:hidden;}
+  .cta-banner::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    background-image:repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .cta-wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;}
   .cta-banner h2{font-size:2.2rem;color:#fff;margin-bottom:0;}
   .cta-banner p{color:#ffe3d6;margin:6px 0 0;}
 
@@ -223,7 +379,8 @@
   .contact-section{background:var(--paper);}
   .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
   .info-list{list-style:none;padding:0;margin:20px 0;}
-  .info-list li{padding:16px 0;border-bottom:1px solid var(--line);}
+  .info-list li{padding:16px 0;border-bottom:1px solid var(--line);transition:padding-left .2s ease;}
+  .info-list li:hover{padding-left:6px;}
   .info-list strong{display:block;color:var(--navy);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.5px;font-size:1.05rem;}
   .info-list span{color:var(--steel);font-size:.92rem;}
 
@@ -239,11 +396,13 @@
     margin-bottom:16px;
     background:var(--paper);
     color:var(--ink);
+    transition:border-color .2s ease, box-shadow .2s ease;
   }
-  input:focus, select:focus, textarea:focus{outline:2px solid var(--rust);border-color:var(--rust);}
+  input:focus, select:focus, textarea:focus{outline:none;border-color:var(--rust);box-shadow:0 0 0 3px var(--rust-glow);}
   textarea{resize:vertical;min-height:100px;}
   .form-note{font-size:.8rem;color:var(--steel);margin-top:-6px;}
-  #form-status{margin-top:14px;font-weight:700;font-size:.9rem;color:var(--ok);text-transform:uppercase;letter-spacing:.4px;font-family:'Barlow Condensed',sans-serif;}
+  #form-status{margin-top:14px;font-weight:700;font-size:.9rem;color:var(--ok);text-transform:uppercase;letter-spacing:.4px;font-family:'Barlow Condensed',sans-serif;opacity:0;transform:translateY(6px);transition:opacity .3s ease, transform .3s ease;}
+  #form-status.show{opacity:1;transform:translateY(0);}
 
   /* Footer */
   footer{background:var(--navy);color:#a9b4b8;padding:48px 0 24px;font-size:.9rem;}
@@ -258,6 +417,11 @@
   .sticky-call{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 20px;z-index:200;border-top:3px solid var(--rust);}
   .sticky-call a{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--rust);color:#fff;padding:14px;font-weight:700;text-decoration:none;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.6px;}
 
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+    .reveal, .reveal-scale{opacity:1 !important; transform:none !important;}
+  }
+
   @media (max-width:900px){
     .hero-grid, .area-wrap, .contact-wrap{grid-template-columns:1fr;}
     .hero-panel{padding:36px 24px;}
@@ -265,6 +429,8 @@
     .why-list{grid-template-columns:1fr;}
     .why-list .why-row:nth-child(odd){border-right:none;padding-right:0;}
     .why-list .why-row:nth-child(even){padding-left:0;}
+    .stats-strip{grid-template-columns:1fr 1fr;}
+    .stat{border-bottom:1px solid rgba(255,255,255,0.15);}
     .process-strip{flex-direction:column;}
     .process-step + .process-step{border-left:none;border-top:2px solid var(--navy);}
     .review-strip{grid-template-columns:1fr;}
@@ -281,6 +447,7 @@
     .hero-facts{flex-wrap:wrap;row-gap:16px;}
     .hero-facts div{padding-right:20px;margin-right:20px;}
     .services-grid{grid-template-columns:1fr;}
+    .stats-strip{grid-template-columns:1fr 1fr;}
     .footer-grid{grid-template-columns:1fr;}
     .form-row{grid-template-columns:1fr;}
     body{padding-bottom:66px;}
@@ -290,7 +457,9 @@
 </head>
 <body>
 
-<header>
+<div id="scrollbar"></div>
+
+<header id="siteHeader">
   <div class="container nav-wrap">
     <div class="brand">
       <span class="badge">🛠️</span>
@@ -315,10 +484,15 @@
 </header>
 
 <section class="hero">
+  <div class="hero-bg-grid" id="heroGrid"></div>
+  <div class="hero-glow" id="heroGlow"></div>
   <div class="container hero-grid">
     <div class="hero-text">
       <span class="tag">Licensed &amp; Insured — Inland Empire</span>
-      <h1>We Kill Bugs.<br><span>No Sales Pitch.</span></h1>
+      <h1>
+        <span class="line"><span>We Kill Bugs.</span></span>
+        <span class="line"><span class="accent">No Sales Pitch.</span></span>
+      </h1>
       <p class="lead">Val's Pest Solutions is a working pest control company, not a franchise script. We show up, we tell you what we find, we treat it, and it stays gone.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contact">Request a Quote</a>
@@ -345,40 +519,47 @@
   </div>
 </section>
 
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <span>Riverside</span><span>San Bernardino</span><span>Ontario</span><span>Rancho Cucamonga</span><span>Fontana</span><span>Corona</span><span>Moreno Valley</span><span>Redlands</span><span>Chino Hills</span><span>Upland</span>
+    <span>Riverside</span><span>San Bernardino</span><span>Ontario</span><span>Rancho Cucamonga</span><span>Fontana</span><span>Corona</span><span>Moreno Valley</span><span>Redlands</span><span>Chino Hills</span><span>Upland</span>
+  </div>
+</div>
+
 <section id="services">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="tag">Services</span>
       <h2>What We Actually Do</h2>
       <p>No bundled maintenance plans you don't need. Tell us the problem, we treat that problem, and we're straight with you about what it'll take.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card">
+    <div class="services-grid stagger">
+      <div class="service-card reveal" style="--i:0">
         <div class="num">01</div>
         <h3>Roaches</h3>
         <p>Bait and treatment at the source — kitchens, plumbing lines, and entry points — not just spraying what you can see.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal" style="--i:1">
         <div class="num">02</div>
         <h3>Ants</h3>
         <p>We trace the trail to the colony instead of treating the trail itself. That's the difference between gone and back-in-a-week.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal" style="--i:2">
         <div class="num">03</div>
         <h3>Termites</h3>
         <p>Real inspection, real report, real treatment plan. If there's no termite activity, we'll tell you that too.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal" style="--i:3">
         <div class="num">04</div>
         <h3>Fleas</h3>
         <p>Interior and yard treatment built around your pets and kids being safe on the property during and after service.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal" style="--i:4">
         <div class="num">05</div>
         <h3>Spiders</h3>
         <p>Web removal plus perimeter treatment so they don't just move to the other side of the house.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal" style="--i:5">
         <div class="num">06</div>
         <h3>General Pest Control</h3>
         <p>Rodents, wasps, silverfish, earwigs — routine or one-time service for homes and commercial properties.</p>
@@ -389,34 +570,34 @@
 
 <section id="why-us" class="why-section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="tag" style="color:var(--rust);border-color:var(--rust);">Why Val's</span>
       <h2>Why Customers Stick With Us</h2>
       <p>No corporate call center. No quotas. Just a local company that has to show up in this community every day.</p>
     </div>
-    <div class="why-list">
-      <div class="why-row">
+    <div class="why-list stagger">
+      <div class="why-row reveal" style="--i:0">
         <div class="mark">01</div>
         <div>
           <h4>You Talk to a Real Technician</h4>
           <p>No call center reading a script. The person who quotes the job is the person who understands it.</p>
         </div>
       </div>
-      <div class="why-row">
+      <div class="why-row reveal" style="--i:1">
         <div class="mark">02</div>
         <div>
           <h4>Prices Quoted Before We Start</h4>
           <p>You know the cost before any work begins. No surprise line items on the invoice.</p>
         </div>
       </div>
-      <div class="why-row">
+      <div class="why-row reveal" style="--i:2">
         <div class="mark">03</div>
         <div>
           <h4>If It Comes Back, We Come Back</h4>
           <p>Re-treatment between scheduled visits is on us — not an extra service call.</p>
         </div>
       </div>
-      <div class="why-row">
+      <div class="why-row reveal" style="--i:3">
         <div class="mark">04</div>
         <div>
           <h4>Products Safe for Kids and Pets</h4>
@@ -424,33 +605,39 @@
         </div>
       </div>
     </div>
+    <div class="stats-strip stagger">
+      <div class="stat reveal-scale" style="--i:0"><div class="count" data-target="15">0</div><div class="label">Years in Business</div></div>
+      <div class="stat reveal-scale" style="--i:1"><div class="count" data-target="4200">0</div><div class="label">Jobs Completed</div></div>
+      <div class="stat reveal-scale" style="--i:2"><div class="count" data-target="98">0</div><div class="label">% Re-Treat Free</div></div>
+      <div class="stat reveal-scale" style="--i:3"><div class="count" data-target="24">0</div><div class="label">Avg. Callback Hours</div></div>
+    </div>
   </div>
 </section>
 
 <section id="process">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="tag">Process</span>
       <h2>How a Job Actually Runs</h2>
       <p>Four steps. No hidden ones.</p>
     </div>
-    <div class="process-strip">
-      <div class="process-step">
+    <div class="process-strip stagger">
+      <div class="process-step reveal" style="--i:0">
         <span class="step-num">Step 1</span>
         <h4>Call In</h4>
         <p>Describe the problem. We give you a straight answer and a real price range on the phone.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal" style="--i:1">
         <span class="step-num">Step 2</span>
         <h4>Inspect</h4>
         <p>We look at the actual property — entry points, conditions, and what's driving the infestation.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal" style="--i:2">
         <span class="step-num">Step 3</span>
         <h4>Treat</h4>
         <p>Targeted treatment for the pest you actually have, applied where it matters.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal" style="--i:3">
         <span class="step-num">Step 4</span>
         <h4>Confirm</h4>
         <p>We follow up to confirm it worked. If it didn't, we're back out — no charge.</p>
@@ -461,24 +648,24 @@
 
 <section id="reviews">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="tag">Reviews</span>
       <h2>What the IE Is Saying</h2>
     </div>
-    <div class="review-strip">
-      <div class="review-card">
+    <div class="review-strip stagger">
+      <div class="review-card reveal" style="--i:0">
         <div class="stars">★★★★★</div>
         <p class="quote">"Had a roach problem we'd fought for months. Val's fixed it in one visit and one follow-up. No fluff, just results."</p>
         <div class="who">Rachel M.</div>
         <div class="loc">Riverside, CA</div>
       </div>
-      <div class="review-card">
+      <div class="review-card reveal" style="--i:1">
         <div class="stars">★★★★★</div>
         <p class="quote">"Told us straight there was no termite activity yet, just conditions that could lead to it. Didn't try to sell us a treatment we didn't need."</p>
         <div class="who">David T.</div>
         <div class="loc">San Bernardino, CA</div>
       </div>
-      <div class="review-card">
+      <div class="review-card reveal" style="--i:2">
         <div class="stars">★★★★★</div>
         <p class="quote">"Same tech both visits. Knew our property, knew what he'd done last time. That doesn't happen with the big chains."</p>
         <div class="who">Sarah K.</div>
@@ -490,7 +677,7 @@
 
 <section id="area" class="area-section">
   <div class="container area-wrap">
-    <div>
+    <div class="reveal">
       <span class="tag">Service Area</span>
       <h2 style="color:var(--navy);font-size:2.2rem;">Where We Work</h2>
       <p style="color:var(--steel);">Based in the Inland Empire, working the Inland Empire. If you're outside this list, call anyway — we cover more ground than what's printed here.</p>
@@ -507,7 +694,7 @@
         <li>Upland</li>
       </ul>
     </div>
-    <div class="area-card">
+    <div class="area-card reveal" style="transition-delay:.15s;">
       <h3>Not Sure If We Cover You?</h3>
       <p>Call the number below. We'll give you a straight yes or no, not a runaround.</p>
       <a class="btn btn-primary" href="tel:19095551234" style="margin-top:6px;">Call (909) 555-1234</a>
@@ -516,7 +703,7 @@
 </section>
 
 <section class="cta-banner">
-  <div class="container cta-wrap">
+  <div class="container cta-wrap reveal">
     <div>
       <h2>Got Pests? Let's Deal With It.</h2>
       <p>Free quote, honest timeline, no pressure to buy more than you need.</p>
@@ -527,7 +714,7 @@
 
 <section id="contact" class="contact-section">
   <div class="container contact-wrap">
-    <div>
+    <div class="reveal">
       <span class="tag">Contact</span>
       <h2 style="color:var(--navy);font-size:2.2rem;">Request Your Quote</h2>
       <p style="color:var(--steel);">Call, text, or fill out the form. Either way, a real person gets back to you — usually the same day.</p>
@@ -550,7 +737,7 @@
         </li>
       </ul>
     </div>
-    <form id="quoteForm">
+    <form id="quoteForm" class="reveal" style="transition-delay:.1s;">
       <div class="form-row">
         <div>
           <label for="name">Full Name</label>
@@ -627,18 +814,108 @@
 </div>
 
 <script>
+  // Mobile nav
   const menuToggle = document.getElementById('menuToggle');
   const siteNav = document.getElementById('siteNav');
   menuToggle.addEventListener('click', () => siteNav.classList.toggle('open'));
   siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => siteNav.classList.remove('open')));
 
+  // Form submit
   const form = document.getElementById('quoteForm');
   const status = document.getElementById('form-status');
   form.addEventListener('submit', function(e){
     e.preventDefault();
     status.textContent = "Received. We'll be in touch shortly.";
+    status.classList.add('show');
     form.reset();
   });
+
+  // Scroll progress bar + header shrink + hero parallax
+  const scrollbar = document.getElementById('scrollbar');
+  const header = document.getElementById('siteHeader');
+  const heroGrid = document.getElementById('heroGrid');
+  const heroGlow = document.getElementById('heroGlow');
+  let ticking = false;
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollbar.style.width = pct + '%';
+
+    header.classList.toggle('scrolled', scrollTop > 40);
+
+    if(heroGrid){
+      const y = scrollTop * 0.15;
+      heroGrid.style.transform = 'translateY(' + y + 'px)';
+    }
+    if(heroGlow){
+      const y2 = scrollTop * 0.25;
+      heroGlow.style.transform = 'translateY(' + y2 + 'px)';
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if(!ticking){
+      requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  });
+  onScroll();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Animated counters
+  const counters = document.querySelectorAll('.count');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        const duration = 1400;
+        const start = performance.now();
+        function step(now){
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target).toLocaleString();
+          if(progress < 1){
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toLocaleString();
+          }
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+
+  // Active nav link tracking
+  const navLinks = document.querySelectorAll('#siteNav a');
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = document.querySelector('#siteNav a[href="' + id + '"]');
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(sec => navObserver.observe(sec));
 </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Val's Pest Solutions — Inland Empire Pest Control</title>
+<title>Val's Pest Solutions | Inland Empire Pest Control</title>
 <meta name="description" content="Val's Pest Solutions treats roaches, ants, termites, fleas, spiders and general pests across the Inland Empire. Licensed, insured, 4.9-star rated. Free quote.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -111,6 +111,33 @@
   }
   .trust-line span{display:flex;align-items:center;gap:6px;}
 
+  /* Stats */
+  .stats-strip{background:#fff;border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:center;}
+  .stat .count{font-size:1.9rem;font-weight:800;color:var(--teal);line-height:1;}
+  .stat .label{margin-top:4px;font-size:.82rem;color:var(--muted);font-weight:600;}
+
+  /* FAQ accordion */
+  .faq-section{background:#fff;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:16px 0;font-family:'Inter',sans-serif;font-weight:700;font-size:.98rem;color:var(--navy);
+  }
+  .faq-q .plus{
+    flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--teal);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);background:var(--teal);color:#fff;border-color:var(--teal);}
+  .faq-a{
+    max-height:0;overflow:hidden;
+    transition:max-height .28s ease, padding .28s ease;
+    color:var(--muted);font-size:.92rem;
+  }
+  .faq-item.open .faq-a{padding-bottom:16px;}
+
   section{padding:52px 0;}
   .section-head{max-width:600px;margin:0 auto 30px;}
   .section-head h2{font-size:1.7rem;}
@@ -215,6 +242,7 @@
     .hero-actions .btn{width:auto;}
     .footer-grid{grid-template-columns:2fr 1fr 1fr;}
     .footer-bottom{flex-direction:row;justify-content:space-between;}
+    .stats-grid{grid-template-columns:repeat(4,1fr);}
   }
 
   @media (min-width:900px){
@@ -296,7 +324,7 @@
   <div class="container hero-grid">
     <div class="hero-inner">
       <div class="rating-line"><span class="stars">★★★★★</span> 4.9/5 from 300+ Inland Empire customers</div>
-      <h1>Pest control for the Inland Empire — done right, no fluff.</h1>
+      <h1>Reliable pest control for the Inland Empire.</h1>
       <p class="lead">Serving Riverside, San Bernardino, Ontario, Rancho Cucamonga, Fontana, Corona, Moreno Valley, Redlands, Chino Hills, and Upland.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contact">Get a Free Quote</a>
@@ -311,7 +339,7 @@
     </div>
     <div class="hero-panel">
       <h3>What We Treat</h3>
-      <p>No bundled packages — just the pests that are actually a problem here.</p>
+      <p>Targeted treatment for the pests that are common to this region.</p>
       <ul class="hero-panel-list">
         <li>🪳 Roaches</li>
         <li>🐜 Ants</li>
@@ -320,6 +348,17 @@
         <li>🕷️ Spiders</li>
         <li>🐾 General Pests</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-grid stagger">
+      <div class="stat fade" style="--i:0"><div class="count" data-target="15" data-suffix="+">0</div><div class="label">Years in Business</div></div>
+      <div class="stat fade" style="--i:1"><div class="count" data-target="300" data-suffix="+">0</div><div class="label">Homes Served</div></div>
+      <div class="stat fade" style="--i:2"><div class="count" data-target="49" data-decimals="1">0</div><div class="label">Average Rating</div></div>
+      <div class="stat fade" style="--i:3"><div class="count" data-target="48" data-suffix="hr">0</div><div class="label">Typical Response</div></div>
     </div>
   </div>
 </section>
@@ -333,7 +372,7 @@
     <div class="review-grid stagger">
       <div class="review-card fade" style="--i:0">
         <div class="stars">★★★★★</div>
-        <p class="quote">"Roach problem we'd fought for months — gone in one visit and a follow-up. No fluff, just results."</p>
+        <p class="quote">"We'd been fighting a roach problem for months. Val's cleared it in one visit and a follow-up."</p>
         <div class="who"><div class="avatar">R</div><div><div class="name">Rachel M.</div><div class="loc">Riverside, CA</div></div></div>
       </div>
       <div class="review-card fade" style="--i:1">
@@ -343,7 +382,7 @@
       </div>
       <div class="review-card fade" style="--i:2">
         <div class="stars">★★★★★</div>
-        <p class="quote">"Same tech both visits, knew our property. Doesn't happen with the big chains."</p>
+        <p class="quote">"The same technician came out both times and already knew our property. That made the whole process easier."</p>
         <div class="who"><div class="avatar">S</div><div><div class="name">Sarah K.</div><div class="loc">Ontario, CA</div></div></div>
       </div>
     </div>
@@ -354,8 +393,8 @@
   <div class="container">
     <div class="section-head fade">
       <span class="eyebrow">Services</span>
-      <h2>Straight to the point</h2>
-      <p>Tell us the pest, we treat the pest. No bundles, no upsells.</p>
+      <h2>Our Services</h2>
+      <p>Six pest categories we treat most often across the Inland Empire.</p>
     </div>
     <div class="services-grid stagger">
       <div class="service-card fade" style="--i:0">
@@ -391,7 +430,7 @@
     <div>
       <span class="eyebrow">Service Area</span>
       <h2>Where we work</h2>
-      <p style="color:var(--muted);">Based in the Inland Empire, working the Inland Empire. Don't see your city — call anyway.</p>
+      <p style="color:var(--muted);">Based in the Inland Empire and working across it. If your city isn't listed, call us and we'll confirm coverage.</p>
       <ul class="area-list">
         <li>Riverside</li>
         <li>San Bernardino</li>
@@ -407,7 +446,7 @@
     </div>
     <div class="area-card">
       <h3>Not sure if we cover you?</h3>
-      <p>Call the number below for a straight yes or no.</p>
+      <p>Call the number below and we'll confirm your coverage.</p>
       <a class="btn btn-primary" href="tel:19095551234">Call (909) 555-1234</a>
     </div>
   </div>
@@ -423,12 +462,58 @@
   </div>
 </section>
 
+<section class="faq-section">
+  <div class="container" style="max-width:760px;">
+    <div class="section-head fade">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade">
+        <button class="faq-q" type="button" aria-expanded="false">
+          How fast can you get someone out?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a"><p style="margin:0;">Most jobs are scheduled within 48 hours of your call. If it's urgent, tell us when you call and we'll do what we can to move it up.</p></div>
+      </div>
+      <div class="faq-item fade">
+        <button class="faq-q" type="button" aria-expanded="false">
+          Are your treatments safe for kids and pets?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a"><p style="margin:0;">Yes. We use products labeled for residential use around children and pets, and we'll walk you through any wait time before re-entering treated areas.</p></div>
+      </div>
+      <div class="faq-item fade">
+        <button class="faq-q" type="button" aria-expanded="false">
+          What happens if the pests come back?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a"><p style="margin:0;">If the same issue returns between scheduled visits, we come back and re-treat at no additional charge.</p></div>
+      </div>
+      <div class="faq-item fade">
+        <button class="faq-q" type="button" aria-expanded="false">
+          Do you offer one-time visits or only contracts?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a"><p style="margin:0;">Both. We'll quote a one-time treatment or an ongoing plan depending on what your property needs.</p></div>
+      </div>
+      <div class="faq-item fade">
+        <button class="faq-q" type="button" aria-expanded="false">
+          Are you licensed and insured?
+          <span class="plus">+</span>
+        </button>
+        <div class="faq-a"><p style="margin:0;">Yes, Val's Pest Solutions is fully licensed and insured to operate throughout Riverside and San Bernardino counties.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact-section">
   <div class="container contact-wrap">
     <div class="fade">
       <span class="eyebrow">Contact</span>
       <h2>Request your quote</h2>
-      <p style="color:var(--muted);">Call, text, or fill out the form. A real person gets back to you — usually same day.</p>
+      <p style="color:var(--muted);">Call, text, or fill out the form below. A team member will get back to you, usually the same day.</p>
       <ul class="info-list">
         <li><div class="ic">📞</div><div><strong>Call or Text</strong><span>(909) 555-1234</span></div></li>
         <li><div class="ic">✉️</div><div><strong>Email</strong><span>hello@valspestsolutions.com</span></div></li>
@@ -482,7 +567,7 @@
   </div>
 </footer>
 
-<div class="sticky-call"><a href="tel:19095551234">Call Now — Free Quote</a></div>
+<div class="sticky-call"><a href="tel:19095551234">Call Now for a Free Quote</a></div>
 
 <script>
   const menuToggle = document.getElementById('menuToggle');
@@ -512,6 +597,64 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
   fadeEls.forEach(el => observer.observe(el));
+
+  // Animated stat counters
+  const counters = document.querySelectorAll('.count');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      const divisor = Math.pow(10, decimals);
+      const displayTarget = target / divisor;
+      const duration = 1200;
+      const start = performance.now();
+      function step(now){
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (eased * displayTarget).toFixed(decimals) + suffix;
+        if(progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if(other !== item){
+          other.classList.remove('open');
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+    });
+  });
+
+  // Active nav link tracking
+  const navLinks = document.querySelectorAll('#siteNav a');
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = document.querySelector('#siteNav a[href="#' + entry.target.id + '"]');
+      if(link && entry.isIntersecting){
+        navLinks.forEach(l => l.style.color = '');
+        link.style.color = 'var(--teal)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(sec => navObserver.observe(sec));
 </script>
 
 </body>

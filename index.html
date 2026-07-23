@@ -82,43 +82,44 @@
   .stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
 
   /* Hero with Inland Empire backdrop */
-  .hero{position:relative;padding:80px 0 60px;text-align:center;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#fbfcfe 55%,#eef4fb 100%);}
+  .hero{position:relative;padding:88px 0 76px;text-align:center;overflow:hidden;background:#081321;}
   .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
   .hero-bg svg{position:absolute;bottom:0;left:0;width:100%;height:78%;display:block;}
   .hero-bg .ridge{transition:transform .18s ease-out;will-change:transform;}
   .hero-photo{
     position:absolute;left:0;top:-6%;width:100%;height:116%;
-    object-fit:cover;object-position:center 32%;
-    opacity:.5;will-change:transform;
+    object-fit:cover;object-position:center 34%;
+    opacity:1;will-change:transform;
   }
-  .hero-fade-top{position:absolute;inset:0;background:linear-gradient(180deg,#ffffff 6%,rgba(255,255,255,0.7) 30%,rgba(255,255,255,0.32) 52%,rgba(255,255,255,0.05) 74%,rgba(255,255,255,0) 88%);}
+  .hero-fade-top{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,19,33,0.76) 0%,rgba(8,19,33,0.44) 40%,rgba(8,19,33,0.40) 62%,rgba(8,19,33,0.64) 100%);}
   .hero-inner{position:relative;z-index:2;}
   .rating-line{
     display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
-    font-size:.86rem;font-weight:500;color:var(--gray);margin-bottom:18px;
-    background:rgba(255,255,255,0.7);border:1px solid var(--line);
-    padding:7px 15px;border-radius:980px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    font-size:.9rem;font-weight:500;color:rgba(255,255,255,0.92);margin-bottom:18px;
+    text-shadow:0 1px 12px rgba(0,0,0,0.45);
   }
-  .rating-line .stars{color:#ffb100;letter-spacing:1px;}
-  .hero h1{font-size:2.5rem;line-height:1.08;margin:0 auto .35em;max-width:660px;}
-  .hero p.lead{color:var(--gray);font-size:1.15rem;max-width:520px;margin:0 auto 28px;}
+  .rating-line .stars{color:#ffc531;letter-spacing:1px;}
+  .hero h1{font-size:2.5rem;line-height:1.08;margin:0 auto .35em;max-width:660px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,0.4);}
+  .hero p.lead{color:rgba(255,255,255,0.9);font-size:1.15rem;max-width:520px;margin:0 auto 28px;text-shadow:0 1px 16px rgba(0,0,0,0.45);}
+  .hero .btn-outline{color:#fff;border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .hero .btn-outline:hover{background:#fff;color:var(--ink);border-color:#fff;}
   .hero-actions{display:flex;flex-direction:column;gap:12px;align-items:center;max-width:280px;margin:0 auto;}
   .hero-actions .btn{width:100%;}
   .area-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:680px;margin:34px auto 0;}
   .area-chip{
-    background:rgba(255,255,255,0.75);border:1px solid var(--line);
-    padding:7px 14px;border-radius:980px;font-weight:500;font-size:.82rem;color:var(--ink);
+    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.32);
+    padding:7px 14px;border-radius:980px;font-weight:500;font-size:.82rem;color:#fff;
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     transition:transform .2s ease, background .2s ease, border-color .2s ease;
   }
-  .area-chip:hover{transform:translateY(-2px);background:#fff;border-color:var(--blue);}
+  .area-chip:hover{transform:translateY(-2px);background:rgba(255,255,255,0.24);border-color:#fff;}
   .scroll-cue{
-    margin:44px auto 0;width:26px;height:42px;border:2px solid var(--gray-light);border-radius:14px;
-    position:relative;opacity:.7;
+    margin:44px auto 0;width:26px;height:42px;border:2px solid rgba(255,255,255,0.6);border-radius:14px;
+    position:relative;opacity:.9;
   }
   .scroll-cue::after{
     content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:2px;
-    background:var(--gray);transform:translateX(-50%);animation:scrollDot 1.6s ease-in-out infinite;
+    background:#fff;transform:translateX(-50%);animation:scrollDot 1.6s ease-in-out infinite;
   }
   @keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0);}30%{opacity:1;}60%{opacity:1;transform:translate(-50%,12px);}100%{opacity:0;transform:translate(-50%,16px);}}
 

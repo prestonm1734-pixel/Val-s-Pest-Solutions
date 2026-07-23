@@ -57,7 +57,7 @@
     position:sticky;top:0;z-index:100;
   }
   .nav-wrap{display:flex;align-items:center;justify-content:space-between;height:48px;}
-  .brand{font-weight:600;font-size:1rem;letter-spacing:-0.01em;color:var(--ink);text-decoration:none;}
+  .brand{font-weight:600;font-size:.95rem;letter-spacing:-0.01em;color:var(--ink);text-decoration:none;white-space:nowrap;}
   nav{display:none;}
   nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;}
   nav a{text-decoration:none;color:var(--ink);font-weight:400;font-size:.82rem;transition:color .2s ease;}
@@ -65,6 +65,12 @@
   .nav-cta{display:flex;align-items:center;gap:14px;}
   .phone-link{display:none;font-weight:400;text-decoration:none;color:var(--ink);font-size:.82rem;}
   .menu-toggle{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--ink);padding:4px 6px;line-height:1;}
+  .nav-cta .btn{white-space:nowrap;}
+  /* Very small screens: rely on hamburger menu + bottom call bar for CTAs */
+  @media (max-width:400px){
+    .nav-cta .btn{display:none;}
+    .brand{font-size:1rem;}
+  }
 
   .mobile-nav{display:none;background:var(--white);border-bottom:1px solid var(--line);padding:6px 22px 14px;}
   .mobile-nav.open{display:block;}
@@ -80,7 +86,12 @@
   .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
   .hero-bg svg{position:absolute;bottom:0;left:0;width:100%;height:78%;display:block;}
   .hero-bg .ridge{transition:transform .18s ease-out;will-change:transform;}
-  .hero-fade-top{position:absolute;inset:0;background:linear-gradient(180deg,#ffffff 8%,rgba(255,255,255,0.35) 42%,rgba(255,255,255,0) 66%);}
+  .hero-photo{
+    position:absolute;left:0;top:-6%;width:100%;height:116%;
+    object-fit:cover;object-position:center 32%;
+    opacity:.5;will-change:transform;
+  }
+  .hero-fade-top{position:absolute;inset:0;background:linear-gradient(180deg,#ffffff 6%,rgba(255,255,255,0.55) 34%,rgba(255,255,255,0.12) 60%,rgba(255,255,255,0) 78%);}
   .hero-inner{position:relative;z-index:2;}
   .rating-line{
     display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
@@ -329,6 +340,7 @@
         <path class="ridge" data-depth="1.4" fill="#8fb2d3" d="M0,522 L200,486 L380,516 L560,480 L760,516 L940,486 L1140,522 L1320,488 L1440,510 L1440,600 L0,600 Z"/>
       </g>
     </svg>
+    <img class="hero-photo ridge" data-depth="0.35" src="assets/inland-empire.jpg" alt="" onerror="this.remove()">
     <div class="hero-fade-top"></div>
   </div>
   <div class="container hero-inner">

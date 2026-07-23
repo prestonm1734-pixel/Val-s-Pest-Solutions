@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Val's Pest Solutions — Pest Control, Inland Empire</title>
+<meta name="description" content="Val's Pest Solutions treats roaches, ants, termites, fleas, spiders and general pests across the Inland Empire. Licensed, insured, no-nonsense service. Call for a quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<style>
+  :root{
+    --navy:#12202b;
+    --navy-2:#1b3140;
+    --steel:#3c5a68;
+    --rust:#c1461d;
+    --rust-dark:#9c3714;
+    --sand:#e7e1d3;
+    --paper:#f2efe6;
+    --ink:#152026;
+    --line:#c8c0aa;
+    --ok:#3f6b4a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Archivo',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin:0 0 .4em;
+  }
+  a{color:inherit;}
+  .container{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    font-size:.8rem;
+    color:var(--rust);
+    padding:5px 12px;
+    border:2px solid var(--rust);
+    margin-bottom:16px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 26px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    font-size:1.05rem;
+    text-decoration:none;
+    border:2px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--rust);color:#fff;}
+  .btn-primary:hover{background:var(--rust-dark);}
+  .btn-dark{background:var(--navy);color:#fff;}
+  .btn-dark:hover{background:var(--navy-2);}
+  .btn-ghost{background:transparent;color:#fff;border-color:#fff;}
+  .btn-ghost:hover{background:#fff;color:var(--navy);}
+
+  /* Header */
+  header{background:var(--navy);color:#fff;border-bottom:4px solid var(--rust);}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;text-transform:uppercase;letter-spacing:.5px;}
+  .brand .badge{
+    width:40px;height:40px;background:var(--rust);
+    display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+    transform:rotate(-3deg);
+  }
+  nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;}
+  nav a{text-decoration:none;color:#dfe6e9;font-weight:500;font-size:.92rem;}
+  nav a:hover{color:var(--rust);}
+  .nav-cta{display:flex;align-items:center;gap:16px;}
+  .phone-link{font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;letter-spacing:.5px;}
+  .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;}
+
+  /* Hero */
+  .hero{
+    background:var(--navy);
+    color:#fff;
+    padding:70px 0 0;
+    position:relative;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;}
+  .hero-text{padding:40px 0 70px;}
+  .hero h1{font-size:3.4rem;line-height:.98;color:#fff;margin-bottom:.3em;}
+  .hero h1 span{color:var(--rust);}
+  .hero p.lead{font-size:1.15rem;color:#c7d0d4;max-width:480px;margin-bottom:30px;font-family:'Archivo',sans-serif;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+  .hero-facts{
+    display:flex;
+    gap:0;
+    border-top:1px solid rgba(255,255,255,0.15);
+    padding-top:22px;
+  }
+  .hero-facts div{padding-right:30px;margin-right:30px;border-right:1px solid rgba(255,255,255,0.15);}
+  .hero-facts div:last-child{border-right:none;}
+  .hero-facts strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:var(--rust);}
+  .hero-facts span{font-size:.82rem;color:#a9b4b8;text-transform:uppercase;letter-spacing:.5px;}
+  .hero-panel{
+    background:var(--rust);
+    color:#fff;
+    padding:44px 40px;
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .hero-panel h3{color:#fff;font-size:1.5rem;}
+  .hero-panel p{color:#ffe3d6;font-size:.95rem;margin-bottom:22px;}
+  .pest-list{list-style:none;padding:0;margin:0;display:grid;gap:0;}
+  .pest-list li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,0.25);
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    font-size:1.05rem;
+  }
+  .pest-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.25);}
+  .pest-list .emoji{font-size:1.3rem;}
+
+  /* Sections */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head h2{font-size:2.4rem;color:var(--navy);}
+  .section-head p{color:var(--steel);font-family:'Archivo',sans-serif;font-size:1.02rem;}
+
+  /* Services */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:2px solid var(--navy);}
+  .service-card{background:var(--paper);padding:30px 26px;}
+  .service-card .num{font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:700;color:var(--rust);line-height:1;margin-bottom:8px;}
+  .service-card h3{font-size:1.35rem;color:var(--navy);}
+  .service-card p{color:var(--steel);font-size:.94rem;margin:0;}
+
+  /* Why us - straightforward list, no icons soup */
+  .why-section{background:var(--navy);color:#fff;}
+  .why-section .section-head h2{color:#fff;}
+  .why-section .section-head p{color:#a9b4b8;}
+  .why-list{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,0.15);}
+  .why-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:18px;
+    padding:24px 0;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+  }
+  .why-list .why-row:nth-child(odd){padding-right:30px;border-right:1px solid rgba(255,255,255,0.15);}
+  .why-list .why-row:nth-child(even){padding-left:30px;}
+  .why-row .mark{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;color:var(--rust);}
+  .why-row h4{color:#fff;font-size:1.2rem;margin-bottom:6px;}
+  .why-row p{color:#a9b4b8;margin:0;font-size:.92rem;}
+
+  /* Process */
+  .process-strip{display:flex;border:2px solid var(--navy);}
+  .process-step{flex:1;padding:28px 24px;position:relative;background:var(--paper);}
+  .process-step + .process-step{border-left:2px solid var(--navy);}
+  .process-step .step-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    color:#fff;
+    background:var(--navy);
+    display:inline-block;
+    padding:2px 10px;
+    margin-bottom:12px;
+  }
+  .process-step h4{color:var(--navy);font-size:1.2rem;}
+  .process-step p{color:var(--steel);font-size:.9rem;margin:0;}
+
+  /* Reviews */
+  .review-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:2px solid var(--navy);}
+  .review-card{background:#fff;padding:28px;}
+  .review-card .stars{color:var(--rust);letter-spacing:2px;margin-bottom:10px;}
+  .review-card p.quote{font-size:.96rem;color:var(--ink);margin-bottom:16px;}
+  .review-card .who{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--navy);font-size:.95rem;}
+  .review-card .loc{color:var(--steel);font-size:.82rem;}
+
+  /* Service area */
+  .area-section{background:var(--sand);}
+  .area-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .area-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;margin:20px 0 0;padding:0;list-style:none;}
+  .area-list li{
+    color:var(--navy);
+    font-weight:600;
+    font-size:1rem;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  .area-card{background:var(--navy);color:#fff;padding:36px;border-left:6px solid var(--rust);}
+  .area-card h3{color:#fff;}
+  .area-card p{color:#c7d0d4;}
+
+  /* CTA banner */
+  .cta-banner{background:var(--rust);color:#fff;}
+  .cta-wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .cta-banner h2{font-size:2.2rem;color:#fff;margin-bottom:0;}
+  .cta-banner p{color:#ffe3d6;margin:6px 0 0;}
+
+  /* Contact */
+  .contact-section{background:var(--paper);}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+  .info-list{list-style:none;padding:0;margin:20px 0;}
+  .info-list li{padding:16px 0;border-bottom:1px solid var(--line);}
+  .info-list strong{display:block;color:var(--navy);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.5px;font-size:1.05rem;}
+  .info-list span{color:var(--steel);font-size:.92rem;}
+
+  form{background:#fff;border:2px solid var(--navy);padding:32px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  label{display:block;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;color:var(--navy);font-family:'Barlow Condensed',sans-serif;}
+  input, select, textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    font-family:'Archivo',sans-serif;
+    font-size:.95rem;
+    margin-bottom:16px;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  input:focus, select:focus, textarea:focus{outline:2px solid var(--rust);border-color:var(--rust);}
+  textarea{resize:vertical;min-height:100px;}
+  .form-note{font-size:.8rem;color:var(--steel);margin-top:-6px;}
+  #form-status{margin-top:14px;font-weight:700;font-size:.9rem;color:var(--ok);text-transform:uppercase;letter-spacing:.4px;font-family:'Barlow Condensed',sans-serif;}
+
+  /* Footer */
+  footer{background:var(--navy);color:#a9b4b8;padding:48px 0 24px;font-size:.9rem;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:32px;}
+  .footer-grid h4{color:#fff;margin-bottom:14px;font-size:1.05rem;}
+  .footer-grid ul{list-style:none;padding:0;margin:0;}
+  .footer-grid ul li{margin-bottom:10px;}
+  .footer-grid a{text-decoration:none;color:#a9b4b8;}
+  .footer-grid a:hover{color:var(--rust);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem;color:#748088;}
+
+  .sticky-call{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:12px 20px;z-index:200;border-top:3px solid var(--rust);}
+  .sticky-call a{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--rust);color:#fff;padding:14px;font-weight:700;text-decoration:none;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.6px;}
+
+  @media (max-width:900px){
+    .hero-grid, .area-wrap, .contact-wrap{grid-template-columns:1fr;}
+    .hero-panel{padding:36px 24px;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .why-list{grid-template-columns:1fr;}
+    .why-list .why-row:nth-child(odd){border-right:none;padding-right:0;}
+    .why-list .why-row:nth-child(even){padding-left:0;}
+    .process-strip{flex-direction:column;}
+    .process-step + .process-step{border-left:none;border-top:2px solid var(--navy);}
+    .review-strip{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .cta-wrap{flex-direction:column;align-items:flex-start;}
+  }
+  @media (max-width:720px){
+    nav{position:absolute;top:100%;left:0;right:0;background:var(--navy);flex-direction:column;padding:10px 24px 20px;display:none;}
+    nav.open{display:flex;}
+    nav ul{flex-direction:column;gap:14px;}
+    .menu-toggle{display:block;}
+    .nav-cta .phone-link{display:none;}
+    .hero h1{font-size:2.4rem;}
+    .hero-facts{flex-wrap:wrap;row-gap:16px;}
+    .hero-facts div{padding-right:20px;margin-right:20px;}
+    .services-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    body{padding-bottom:66px;}
+    .sticky-call{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrap">
+    <div class="brand">
+      <span class="badge">🛠️</span>
+      Val's Pest Solutions
+    </div>
+    <nav id="siteNav">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#area">Service Area</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="phone-link" href="tel:19095551234">(909) 555-1234</a>
+      <a class="btn btn-primary" href="#contact" style="padding:10px 18px;font-size:.9rem;">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="tag">Licensed &amp; Insured — Inland Empire</span>
+      <h1>We Kill Bugs.<br><span>No Sales Pitch.</span></h1>
+      <p class="lead">Val's Pest Solutions is a working pest control company, not a franchise script. We show up, we tell you what we find, we treat it, and it stays gone.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Request a Quote</a>
+        <a class="btn btn-dark" href="tel:19095551234">Call (909) 555-1234</a>
+      </div>
+      <div class="hero-facts">
+        <div><strong>15+</strong><span>Years in the IE</span></div>
+        <div><strong>48hr</strong><span>Typical Response</span></div>
+        <div><strong>1</strong><span>Owner, on Every Job</span></div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <h3>What We Treat</h3>
+      <p>No add-on packages. No upsells. Just the pests that are actually a problem in this region.</p>
+      <ul class="pest-list">
+        <li><span class="emoji">🪳</span> Roaches</li>
+        <li><span class="emoji">🐜</span> Ants</li>
+        <li><span class="emoji">🪵</span> Termites</li>
+        <li><span class="emoji">🦟</span> Fleas</li>
+        <li><span class="emoji">🕷️</span> Spiders</li>
+        <li><span class="emoji">🐾</span> General Pest Control</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">Services</span>
+      <h2>What We Actually Do</h2>
+      <p>No bundled maintenance plans you don't need. Tell us the problem, we treat that problem, and we're straight with you about what it'll take.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="num">01</div>
+        <h3>Roaches</h3>
+        <p>Bait and treatment at the source — kitchens, plumbing lines, and entry points — not just spraying what you can see.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">02</div>
+        <h3>Ants</h3>
+        <p>We trace the trail to the colony instead of treating the trail itself. That's the difference between gone and back-in-a-week.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">03</div>
+        <h3>Termites</h3>
+        <p>Real inspection, real report, real treatment plan. If there's no termite activity, we'll tell you that too.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">04</div>
+        <h3>Fleas</h3>
+        <p>Interior and yard treatment built around your pets and kids being safe on the property during and after service.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">05</div>
+        <h3>Spiders</h3>
+        <p>Web removal plus perimeter treatment so they don't just move to the other side of the house.</p>
+      </div>
+      <div class="service-card">
+        <div class="num">06</div>
+        <h3>General Pest Control</h3>
+        <p>Rodents, wasps, silverfish, earwigs — routine or one-time service for homes and commercial properties.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why-us" class="why-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag" style="color:var(--rust);border-color:var(--rust);">Why Val's</span>
+      <h2>Why Customers Stick With Us</h2>
+      <p>No corporate call center. No quotas. Just a local company that has to show up in this community every day.</p>
+    </div>
+    <div class="why-list">
+      <div class="why-row">
+        <div class="mark">01</div>
+        <div>
+          <h4>You Talk to a Real Technician</h4>
+          <p>No call center reading a script. The person who quotes the job is the person who understands it.</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="mark">02</div>
+        <div>
+          <h4>Prices Quoted Before We Start</h4>
+          <p>You know the cost before any work begins. No surprise line items on the invoice.</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="mark">03</div>
+        <div>
+          <h4>If It Comes Back, We Come Back</h4>
+          <p>Re-treatment between scheduled visits is on us — not an extra service call.</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <div class="mark">04</div>
+        <div>
+          <h4>Products Safe for Kids and Pets</h4>
+          <p>Effective treatments, applied properly, without turning your home into a hazard zone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">Process</span>
+      <h2>How a Job Actually Runs</h2>
+      <p>Four steps. No hidden ones.</p>
+    </div>
+    <div class="process-strip">
+      <div class="process-step">
+        <span class="step-num">Step 1</span>
+        <h4>Call In</h4>
+        <p>Describe the problem. We give you a straight answer and a real price range on the phone.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num">Step 2</span>
+        <h4>Inspect</h4>
+        <p>We look at the actual property — entry points, conditions, and what's driving the infestation.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num">Step 3</span>
+        <h4>Treat</h4>
+        <p>Targeted treatment for the pest you actually have, applied where it matters.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num">Step 4</span>
+        <h4>Confirm</h4>
+        <p>We follow up to confirm it worked. If it didn't, we're back out — no charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="tag">Reviews</span>
+      <h2>What the IE Is Saying</h2>
+    </div>
+    <div class="review-strip">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Had a roach problem we'd fought for months. Val's fixed it in one visit and one follow-up. No fluff, just results."</p>
+        <div class="who">Rachel M.</div>
+        <div class="loc">Riverside, CA</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Told us straight there was no termite activity yet, just conditions that could lead to it. Didn't try to sell us a treatment we didn't need."</p>
+        <div class="who">David T.</div>
+        <div class="loc">San Bernardino, CA</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Same tech both visits. Knew our property, knew what he'd done last time. That doesn't happen with the big chains."</p>
+        <div class="who">Sarah K.</div>
+        <div class="loc">Ontario, CA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="area" class="area-section">
+  <div class="container area-wrap">
+    <div>
+      <span class="tag">Service Area</span>
+      <h2 style="color:var(--navy);font-size:2.2rem;">Where We Work</h2>
+      <p style="color:var(--steel);">Based in the Inland Empire, working the Inland Empire. If you're outside this list, call anyway — we cover more ground than what's printed here.</p>
+      <ul class="area-list">
+        <li>Riverside</li>
+        <li>San Bernardino</li>
+        <li>Ontario</li>
+        <li>Rancho Cucamonga</li>
+        <li>Fontana</li>
+        <li>Corona</li>
+        <li>Moreno Valley</li>
+        <li>Redlands</li>
+        <li>Chino / Chino Hills</li>
+        <li>Upland</li>
+      </ul>
+    </div>
+    <div class="area-card">
+      <h3>Not Sure If We Cover You?</h3>
+      <p>Call the number below. We'll give you a straight yes or no, not a runaround.</p>
+      <a class="btn btn-primary" href="tel:19095551234" style="margin-top:6px;">Call (909) 555-1234</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container cta-wrap">
+    <div>
+      <h2>Got Pests? Let's Deal With It.</h2>
+      <p>Free quote, honest timeline, no pressure to buy more than you need.</p>
+    </div>
+    <a class="btn btn-dark" href="#contact">Request a Quote</a>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container contact-wrap">
+    <div>
+      <span class="tag">Contact</span>
+      <h2 style="color:var(--navy);font-size:2.2rem;">Request Your Quote</h2>
+      <p style="color:var(--steel);">Call, text, or fill out the form. Either way, a real person gets back to you — usually the same day.</p>
+      <ul class="info-list">
+        <li>
+          <strong>Call or Text</strong>
+          <span>(909) 555-1234</span>
+        </li>
+        <li>
+          <strong>Email</strong>
+          <span>hello@valspestsolutions.com</span>
+        </li>
+        <li>
+          <strong>Hours</strong>
+          <span>Mon–Sat: 7am – 7pm | Sun: Emergency calls only</span>
+        </li>
+        <li>
+          <strong>Coverage</strong>
+          <span>Riverside &amp; San Bernardino Counties</span>
+        </li>
+      </ul>
+    </div>
+    <form id="quoteForm">
+      <div class="form-row">
+        <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(909) 555-0000" required>
+        </div>
+      </div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+
+      <label for="pest">Pest Issue</label>
+      <select id="pest" name="pest" required>
+        <option value="" disabled selected>Select a pest</option>
+        <option>Roaches</option>
+        <option>Ants</option>
+        <option>Termites</option>
+        <option>Fleas</option>
+        <option>Spiders</option>
+        <option>General Pest Control</option>
+        <option>Not Sure / Other</option>
+      </select>
+
+      <label for="message">Tell Us What's Going On</label>
+      <textarea id="message" name="message" placeholder="Where's the problem, how long has it been going on, home or business?"></textarea>
+      <p class="form-note">We respond same-day during business hours. No auto-dial follow-up calls.</p>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;">Send Request</button>
+      <div id="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff;margin-bottom:10px;">
+          <span class="badge">🛠️</span>
+          Val's Pest Solutions
+        </div>
+        <p style="max-width:320px;">Locally owned, owner-operated pest control serving the Inland Empire. Straightforward pricing, no gimmicks.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Roaches</a></li>
+          <li><a href="#services">Ants</a></li>
+          <li><a href="#services">Termites</a></li>
+          <li><a href="#services">Fleas &amp; Spiders</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#area">Service Area</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Val's Pest Solutions. All rights reserved.</span>
+      <span>Licensed &amp; Insured | Serving the Inland Empire</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-call">
+  <a href="tel:19095551234">Call Now — Free Quote</a>
+</div>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const siteNav = document.getElementById('siteNav');
+  menuToggle.addEventListener('click', () => siteNav.classList.toggle('open'));
+  siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => siteNav.classList.remove('open')));
+
+  const form = document.getElementById('quoteForm');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = "Received. We'll be in touch shortly.";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>

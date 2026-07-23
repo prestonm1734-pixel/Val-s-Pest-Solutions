@@ -28,33 +28,30 @@
     background:var(--white);
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   h1,h2,h3,h4{margin:0 0 .4em;font-weight:700;letter-spacing:-0.015em;color:var(--ink);}
   p{margin:0 0 1em;}
   a{color:inherit;}
   .container{max-width:1100px;margin:0 auto;padding:0 22px;}
 
-  .eyebrow{
-    display:block;font-weight:600;font-size:.9rem;color:var(--blue);margin-bottom:10px;
-  }
+  .eyebrow{display:block;font-weight:600;font-size:.9rem;color:var(--blue);margin-bottom:10px;}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
     padding:12px 22px;border-radius:980px;font-weight:500;font-size:.98rem;
     text-decoration:none;border:1px solid transparent;cursor:pointer;
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
+    transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
   }
   .btn-primary{background:var(--blue);color:#fff;}
   .btn-primary:hover{background:var(--blue-dark);}
-  .btn-text{color:var(--blue);padding:12px 4px;font-weight:500;}
-  .btn-text:hover{text-decoration:underline;}
   .btn-outline{background:transparent;color:var(--ink);border-color:var(--line);}
   .btn-outline:hover{border-color:var(--gray);}
   .btn-block{width:100%;}
 
   /* Header */
   header{
-    background:rgba(255,255,255,0.82);
+    background:rgba(255,255,255,0.72);
     backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
     border-bottom:1px solid rgba(0,0,0,0.06);
     position:sticky;top:0;z-index:100;
@@ -63,7 +60,7 @@
   .brand{font-weight:600;font-size:1rem;letter-spacing:-0.01em;color:var(--ink);text-decoration:none;}
   nav{display:none;}
   nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;}
-  nav a{text-decoration:none;color:var(--ink);font-weight:400;font-size:.82rem;}
+  nav a{text-decoration:none;color:var(--ink);font-weight:400;font-size:.82rem;transition:color .2s ease;}
   nav a:hover{color:var(--gray);}
   .nav-cta{display:flex;align-items:center;gap:14px;}
   .phone-link{display:none;font-weight:400;text-decoration:none;color:var(--ink);font-size:.82rem;}
@@ -78,25 +75,41 @@
   .fade.in{opacity:1;transform:translateY(0);}
   .stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
 
-  /* Hero */
-  .hero{padding:64px 0 40px;text-align:center;background:var(--white);}
+  /* Hero with Inland Empire backdrop */
+  .hero{position:relative;padding:80px 0 60px;text-align:center;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#fbfcfe 55%,#eef4fb 100%);}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .hero-bg svg{position:absolute;bottom:0;left:0;width:100%;height:78%;display:block;}
+  .hero-bg .ridge{transition:transform .18s ease-out;will-change:transform;}
+  .hero-fade-top{position:absolute;inset:0;background:linear-gradient(180deg,#ffffff 8%,rgba(255,255,255,0.35) 42%,rgba(255,255,255,0) 66%);}
+  .hero-inner{position:relative;z-index:2;}
   .rating-line{
-    display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
-    font-size:.9rem;font-weight:500;color:var(--gray);margin-bottom:18px;
+    display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+    font-size:.86rem;font-weight:500;color:var(--gray);margin-bottom:18px;
+    background:rgba(255,255,255,0.7);border:1px solid var(--line);
+    padding:7px 15px;border-radius:980px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   }
   .rating-line .stars{color:#ffb100;letter-spacing:1px;}
-  .hero h1{font-size:2.5rem;line-height:1.08;margin:0 auto .35em;max-width:640px;}
+  .hero h1{font-size:2.5rem;line-height:1.08;margin:0 auto .35em;max-width:660px;}
   .hero p.lead{color:var(--gray);font-size:1.15rem;max-width:520px;margin:0 auto 28px;}
-  .hero-actions{display:flex;flex-direction:column;gap:12px;align-items:center;margin-bottom:8px;max-width:280px;margin-left:auto;margin-right:auto;}
+  .hero-actions{display:flex;flex-direction:column;gap:12px;align-items:center;max-width:280px;margin:0 auto;}
   .hero-actions .btn{width:100%;}
-
-  .area-chips{
-    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:680px;margin:34px auto 0;
-  }
+  .area-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:680px;margin:34px auto 0;}
   .area-chip{
-    background:var(--paper);border:1px solid var(--line);
+    background:rgba(255,255,255,0.75);border:1px solid var(--line);
     padding:7px 14px;border-radius:980px;font-weight:500;font-size:.82rem;color:var(--ink);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    transition:transform .2s ease, background .2s ease, border-color .2s ease;
   }
+  .area-chip:hover{transform:translateY(-2px);background:#fff;border-color:var(--blue);}
+  .scroll-cue{
+    margin:44px auto 0;width:26px;height:42px;border:2px solid var(--gray-light);border-radius:14px;
+    position:relative;opacity:.7;
+  }
+  .scroll-cue::after{
+    content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:2px;
+    background:var(--gray);transform:translateX(-50%);animation:scrollDot 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0);}30%{opacity:1;}60%{opacity:1;transform:translate(-50%,12px);}100%{opacity:0;transform:translate(-50%,16px);}}
 
   section{padding:56px 0;}
   .section-alt{background:var(--paper);}
@@ -110,25 +123,45 @@
   .stat .count{font-size:2.1rem;font-weight:700;letter-spacing:-0.02em;color:var(--ink);line-height:1;}
   .stat .label{margin-top:6px;font-size:.85rem;color:var(--gray);}
 
-  /* Services */
-  .services-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;}
-  .service-card{
-    background:var(--white);padding:26px 24px;
-    display:flex;align-items:center;gap:16px;
+  /* Interactive pest explorer */
+  .explorer{display:grid;grid-template-columns:1fr;gap:20px;}
+  .pest-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .pest-tab{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--white);border:1px solid var(--line);
+    padding:10px 16px;border-radius:980px;cursor:pointer;
+    font-family:inherit;font-size:.92rem;font-weight:500;color:var(--ink);
+    transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
   }
-  .service-card .ic{
-    width:44px;height:44px;border-radius:12px;flex-shrink:0;
-    background:var(--paper);
-    display:flex;align-items:center;justify-content:center;font-size:1.35rem;
+  .pest-tab:hover{transform:translateY(-2px);border-color:var(--gray);}
+  .pest-tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .pest-tab .dot{font-size:1.1rem;line-height:1;}
+  .pest-panel{
+    background:var(--white);border:1px solid var(--line);border-radius:20px;
+    padding:30px;min-height:230px;
+    display:grid;grid-template-columns:1fr;gap:22px;align-items:center;
   }
-  .service-card h3{font-size:1rem;margin-bottom:2px;font-weight:600;}
-  .service-card p{color:var(--gray);font-size:.88rem;margin:0;}
+  .pest-visual{
+    width:100%;aspect-ratio:16/9;border-radius:16px;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;font-size:4rem;
+    transition:transform .4s cubic-bezier(.2,.7,.3,1);
+  }
+  .pest-detail h3{font-size:1.5rem;margin-bottom:.3em;}
+  .pest-detail p{color:var(--gray);font-size:.98rem;margin-bottom:14px;}
+  .pest-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .pest-steps li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--ink);}
+  .pest-steps li::before{content:"";flex-shrink:0;width:18px;height:18px;margin-top:2px;border-radius:50%;background:rgba(0,113,227,0.12);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-size:12px;background-repeat:no-repeat;background-position:center;}
+  .pest-anim{animation:pestIn .45s cubic-bezier(.2,.7,.3,1);}
+  @keyframes pestIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
   /* Reviews */
   .review-grid{display:grid;grid-template-columns:1fr;gap:16px;}
   .review-card{
     background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
   }
+  .review-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,0.08);}
   .review-card .stars{color:#ffb100;letter-spacing:2px;margin-bottom:12px;font-size:.95rem;}
   .review-card p.quote{font-size:.95rem;margin-bottom:16px;color:var(--ink);}
   .review-card .who{display:flex;align-items:center;gap:10px;}
@@ -152,17 +185,14 @@
   .cta-banner .btn-outline{color:#fff;border-color:rgba(255,255,255,0.3);}
   .cta-banner .btn-outline:hover{border-color:#fff;}
 
-  /* FAQ accordion */
+  /* FAQ */
   .faq-item{border-bottom:1px solid var(--line);}
   .faq-q{
     width:100%;text-align:left;background:none;border:none;cursor:pointer;
     display:flex;align-items:center;justify-content:space-between;gap:16px;
     padding:18px 0;font-family:inherit;font-weight:500;font-size:.98rem;color:var(--ink);
   }
-  .faq-q .plus{
-    flex-shrink:0;font-size:1.3rem;font-weight:300;color:var(--gray);
-    transition:transform .25s ease;
-  }
+  .faq-q .plus{flex-shrink:0;font-size:1.3rem;font-weight:300;color:var(--gray);transition:transform .25s ease;}
   .faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--blue);}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease, padding .28s ease;color:var(--gray);font-size:.92rem;}
   .faq-item.open .faq-a{padding-bottom:18px;}
@@ -196,10 +226,7 @@
   .footer-grid ul li{margin-bottom:8px;}
   .footer-grid a{text-decoration:none;color:var(--gray);}
   .footer-grid a:hover{color:var(--ink);text-decoration:underline;}
-  .footer-bottom{
-    border-top:1px solid var(--line);padding-top:16px;
-    display:flex;flex-direction:column;gap:6px;color:var(--gray-light);
-  }
+  .footer-bottom{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px;color:var(--gray-light);}
 
   .sticky-call{
     position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.9);
@@ -216,16 +243,17 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
     .fade{opacity:1 !important;transform:none !important;}
+    .hero-bg .ridge{transform:none !important;}
   }
 
   @media (min-width:640px){
-    .services-grid{grid-template-columns:1fr 1fr;}
     .review-grid{grid-template-columns:1fr 1fr;}
-    .hero-actions{flex-direction:row;max-width:none;}
+    .hero-actions{flex-direction:row;max-width:none;justify-content:center;}
     .hero-actions .btn{width:auto;}
     .footer-grid{grid-template-columns:2fr 1fr 1fr;}
     .footer-bottom{flex-direction:row;justify-content:space-between;}
     .stats-grid{grid-template-columns:repeat(4,1fr);}
+    .pest-panel{grid-template-columns:1fr 1fr;gap:30px;}
   }
 
   @media (min-width:900px){
@@ -234,15 +262,12 @@
     nav{display:block;}
     .mobile-nav, .menu-toggle{display:none;}
     .phone-link{display:inline-block;}
-
-    .hero{padding:96px 0 60px;}
+    .hero{padding:110px 0 80px;}
     .hero h1{font-size:3.6rem;}
     .hero p.lead{font-size:1.3rem;}
-
     section{padding:88px 0;}
     .section-head{margin-bottom:44px;}
     .section-head h2{font-size:2.3rem;}
-    .services-grid{grid-template-columns:repeat(3,1fr);}
     .review-grid{grid-template-columns:repeat(3,1fr);}
     .area-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
     .cta-wrap{max-width:560px;margin:0 auto;}
@@ -283,8 +308,31 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="container">
-    <div class="rating-line"><span class="stars">★★★★★</span> 4.9/5 from 300+ Inland Empire customers</div>
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset="1" stop-color="#e9f1fb"/>
+        </linearGradient>
+        <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffd9a3" stop-opacity="0.9"/>
+          <stop offset="60%" stop-color="#ffd9a3" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#ffd9a3" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="600" fill="url(#sky)"/>
+      <circle class="ridge" data-depth="0.2" cx="1120" cy="215" r="120" fill="url(#sun)"/>
+      <g opacity="0.55">
+        <path class="ridge" data-depth="0.5" fill="#cddff0" d="M0,400 L120,360 L260,395 L420,348 L560,392 L720,342 L880,388 L1040,350 L1200,392 L1340,358 L1440,384 L1440,600 L0,600 Z"/>
+        <path class="ridge" data-depth="0.9" fill="#b0cbe4" d="M0,462 L160,420 L320,456 L480,410 L640,452 L800,414 L960,456 L1120,420 L1280,458 L1440,424 L1440,600 L0,600 Z"/>
+        <path class="ridge" data-depth="1.4" fill="#8fb2d3" d="M0,522 L200,486 L380,516 L560,480 L760,516 L940,486 L1140,522 L1320,488 L1440,510 L1440,600 L0,600 Z"/>
+      </g>
+    </svg>
+    <div class="hero-fade-top"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="rating-line fade in"><span class="stars">★★★★★</span> 4.9/5 from 300+ Inland Empire customers</div>
     <h1>Reliable pest control for the Inland Empire.</h1>
     <p class="lead">Roaches, ants, termites, fleas, spiders, and general pest control. Licensed and insured.</p>
     <div class="hero-actions">
@@ -303,6 +351,7 @@
       <span class="area-chip">Chino Hills</span>
       <span class="area-chip">Upland</span>
     </div>
+    <div class="scroll-cue"></div>
   </div>
 </section>
 
@@ -313,6 +362,30 @@
       <div class="stat fade" style="--i:1"><div class="count" data-target="300" data-suffix="+">0</div><div class="label">Homes Served</div></div>
       <div class="stat fade" style="--i:2"><div class="count" data-target="49" data-decimals="1">0</div><div class="label">Average Rating</div></div>
       <div class="stat fade" style="--i:3"><div class="count" data-target="48" data-suffix="hr">0</div><div class="label">Typical Response</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section-alt">
+  <div class="container">
+    <div class="section-head fade">
+      <span class="eyebrow">Services</span>
+      <h2>Find your pest</h2>
+      <p>Pick what you are dealing with and see how we handle it.</p>
+    </div>
+    <div class="explorer fade">
+      <div class="pest-tabs" id="pestTabs" role="tablist">
+        <button class="pest-tab active" data-pest="roaches" role="tab"><span class="dot">🪳</span> Roaches</button>
+        <button class="pest-tab" data-pest="ants" role="tab"><span class="dot">🐜</span> Ants</button>
+        <button class="pest-tab" data-pest="termites" role="tab"><span class="dot">🪵</span> Termites</button>
+        <button class="pest-tab" data-pest="fleas" role="tab"><span class="dot">🦟</span> Fleas</button>
+        <button class="pest-tab" data-pest="spiders" role="tab"><span class="dot">🕷️</span> Spiders</button>
+        <button class="pest-tab" data-pest="general" role="tab"><span class="dot">🐾</span> General</button>
+      </div>
+      <div class="pest-panel">
+        <div class="pest-visual" id="pestVisual">🪳</div>
+        <div class="pest-detail" id="pestDetail"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -343,43 +416,7 @@
   </div>
 </section>
 
-<section id="services" class="section-alt">
-  <div class="container">
-    <div class="section-head fade">
-      <span class="eyebrow">Services</span>
-      <h2>Our Services</h2>
-      <p>Six pest categories we treat most often across the Inland Empire.</p>
-    </div>
-    <div class="services-grid stagger">
-      <div class="service-card fade" style="--i:0">
-        <div class="ic">🪳</div>
-        <div><h3>Roaches</h3><p>Bait treatment at the source.</p></div>
-      </div>
-      <div class="service-card fade" style="--i:1">
-        <div class="ic">🐜</div>
-        <div><h3>Ants</h3><p>Colony-level elimination.</p></div>
-      </div>
-      <div class="service-card fade" style="--i:2">
-        <div class="ic">🪵</div>
-        <div><h3>Termites</h3><p>Inspection and a real treatment plan.</p></div>
-      </div>
-      <div class="service-card fade" style="--i:3">
-        <div class="ic">🦟</div>
-        <div><h3>Fleas</h3><p>Home and yard, safe for pets.</p></div>
-      </div>
-      <div class="service-card fade" style="--i:4">
-        <div class="ic">🕷️</div>
-        <div><h3>Spiders</h3><p>Web removal and perimeter treatment.</p></div>
-      </div>
-      <div class="service-card fade" style="--i:5">
-        <div class="ic">🐾</div>
-        <div><h3>General Pest Control</h3><p>Rodents, wasps, and more.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="area">
+<section id="area" class="section-alt">
   <div class="container area-wrap fade">
     <div>
       <span class="eyebrow">Service Area</span>
@@ -414,7 +451,7 @@
   </div>
 </section>
 
-<section class="section-alt">
+<section>
   <div class="container" style="max-width:700px;">
     <div class="section-head fade">
       <span class="eyebrow">FAQ</span>
@@ -422,45 +459,30 @@
     </div>
     <div class="faq-list">
       <div class="faq-item fade">
-        <button class="faq-q" type="button" aria-expanded="false">
-          How fast can you get someone out?
-          <span class="plus">+</span>
-        </button>
+        <button class="faq-q" type="button" aria-expanded="false">How fast can you get someone out?<span class="plus">+</span></button>
         <div class="faq-a"><p style="margin:0;">Most jobs are scheduled within 48 hours of your call. If it's urgent, tell us when you call and we'll do what we can to move it up.</p></div>
       </div>
       <div class="faq-item fade">
-        <button class="faq-q" type="button" aria-expanded="false">
-          Are your treatments safe for kids and pets?
-          <span class="plus">+</span>
-        </button>
+        <button class="faq-q" type="button" aria-expanded="false">Are your treatments safe for kids and pets?<span class="plus">+</span></button>
         <div class="faq-a"><p style="margin:0;">Yes. We use products labeled for residential use around children and pets, and we'll walk you through any wait time before re-entering treated areas.</p></div>
       </div>
       <div class="faq-item fade">
-        <button class="faq-q" type="button" aria-expanded="false">
-          What happens if the pests come back?
-          <span class="plus">+</span>
-        </button>
+        <button class="faq-q" type="button" aria-expanded="false">What happens if the pests come back?<span class="plus">+</span></button>
         <div class="faq-a"><p style="margin:0;">If the same issue returns between scheduled visits, we come back and re-treat at no additional charge.</p></div>
       </div>
       <div class="faq-item fade">
-        <button class="faq-q" type="button" aria-expanded="false">
-          Do you offer one-time visits or only contracts?
-          <span class="plus">+</span>
-        </button>
-        <div class="faq-a"><p style="margin:0;">Both. We'll quote a one-time treatment or an ongoing plan depending on what your property needs.</p></div>
+        <button class="faq-q" type="button" aria-expanded="false">Do you offer one time visits or only contracts?<span class="plus">+</span></button>
+        <div class="faq-a"><p style="margin:0;">Both. We'll quote a one time treatment or an ongoing plan depending on what your property needs.</p></div>
       </div>
       <div class="faq-item fade">
-        <button class="faq-q" type="button" aria-expanded="false">
-          Are you licensed and insured?
-          <span class="plus">+</span>
-        </button>
+        <button class="faq-q" type="button" aria-expanded="false">Are you licensed and insured?<span class="plus">+</span></button>
         <div class="faq-a"><p style="margin:0;">Yes, Val's Pest Solutions is fully licensed and insured to operate throughout Riverside and San Bernardino counties.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="section-alt">
   <div class="container contact-wrap">
     <div class="fade">
       <span class="eyebrow">Contact</span>
@@ -469,7 +491,7 @@
       <ul class="info-list">
         <li><div class="ic">📞</div><div><strong>Call or Text</strong><span>(909) 555-1234</span></div></li>
         <li><div class="ic">✉️</div><div><strong>Email</strong><span>hello@valspestsolutions.com</span></div></li>
-        <li><div class="ic">🕒</div><div><strong>Hours</strong><span>Mon–Sat: 7am–7pm | Sun: Emergency only</span></div></li>
+        <li><div class="ic">🕒</div><div><strong>Hours</strong><span>Mon to Sat: 7am to 7pm | Sun: Emergency only</span></div></li>
         <li><div class="ic">📍</div><div><strong>Coverage</strong><span>Riverside &amp; San Bernardino Counties</span></div></li>
       </ul>
     </div>
@@ -575,6 +597,35 @@
   }, { threshold: 0.5 });
   counters.forEach(el => counterObserver.observe(el));
 
+  // Interactive pest explorer
+  const pestData = {
+    roaches: { icon:'🪳', title:'Roaches', text:'German and American roaches love warm Inland Empire kitchens and bathrooms. We treat at the source and seal the entry points so they do not come back.', steps:['Inspect harborage and moisture areas','Apply gel bait and growth regulator','Follow up to confirm the population is gone'] },
+    ants: { icon:'🐜', title:'Ants', text:'Argentine and pavement ants trail indoors looking for food and water. We trace the trail to the nest and treat the colony, not just the line you see on the counter.', steps:['Locate trails and nesting sites','Treat the colony at the root','Set a perimeter barrier around the home'] },
+    termites: { icon:'🪵', title:'Termites', text:'Subterranean termites cause slow, expensive structural damage. We inspect honestly, show you what we find, and lay out a treatment plan with no pressure.', steps:['Full structural inspection','Written findings and treatment options','Targeted treatment and monitoring'] },
+    fleas: { icon:'🦟', title:'Fleas', text:'Fleas ride in on pets and settle into carpet, bedding, and the yard. We treat indoors and outdoors with products safe to use around animals and kids.', steps:['Treat interior carpet and resting areas','Treat the yard and shaded spots','Advise on pet and laundry steps'] },
+    spiders: { icon:'🕷️', title:'Spiders', text:'We clear the webs, treat the perimeter, and knock down the insects spiders feed on so they have far less reason to stay around your home.', steps:['Remove webs and egg sacs','Treat eaves, corners, and entry points','Reduce the insects they feed on'] },
+    general: { icon:'🐾', title:'General Pest Control', text:'Rodents, wasps, silverfish, earwigs, and the rest. One time visits or ongoing plans for homes and businesses across the Inland Empire.', steps:['Assess the property and pest pressure','Treat and exclude entry points','Optional recurring protection plan'] }
+  };
+  const tabs = document.querySelectorAll('.pest-tab');
+  const pestVisual = document.getElementById('pestVisual');
+  const pestDetail = document.getElementById('pestDetail');
+  function renderPest(key){
+    const d = pestData[key];
+    pestVisual.textContent = d.icon;
+    pestVisual.classList.remove('pest-anim'); void pestVisual.offsetWidth; pestVisual.classList.add('pest-anim');
+    pestDetail.innerHTML = '<h3>' + d.title + '</h3><p>' + d.text + '</p><ul class="pest-steps">' +
+      d.steps.map(s => '<li>' + s + '</li>').join('') + '</ul>';
+    pestDetail.classList.remove('pest-anim'); void pestDetail.offsetWidth; pestDetail.classList.add('pest-anim');
+  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderPest(tab.dataset.pest);
+    });
+  });
+  renderPest('roaches');
+
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item => {
     const btn = item.querySelector('.faq-q');
@@ -607,6 +658,30 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(sec => navObserver.observe(sec));
+
+  // Hero parallax: scroll + pointer depth on mountain layers
+  const heroBg = document.getElementById('heroBg');
+  const ridges = heroBg ? heroBg.querySelectorAll('.ridge') : [];
+  let pointerX = 0, pointerY = 0, scrollY = 0, rafPending = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function applyParallax(){
+    ridges.forEach(r => {
+      const depth = parseFloat(r.dataset.depth) || 0;
+      const tx = pointerX * depth * 22;
+      const ty = (pointerY * depth * 10) + (scrollY * depth * 0.06);
+      r.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)';
+    });
+    rafPending = false;
+  }
+  function queueParallax(){ if(!rafPending && !reduceMotion){ rafPending = true; requestAnimationFrame(applyParallax); } }
+  if(!reduceMotion && ridges.length){
+    window.addEventListener('pointermove', (e) => {
+      pointerX = (e.clientX / window.innerWidth) - 0.5;
+      pointerY = (e.clientY / window.innerHeight) - 0.5;
+      queueParallax();
+    });
+    window.addEventListener('scroll', () => { scrollY = window.scrollY; queueParallax(); }, { passive:true });
+  }
 </script>
 
 </body>
